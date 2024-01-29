@@ -89,30 +89,8 @@ end)
 HomeTab:Section("Main")
 
 
-HomeTab:Toggle("AutoPunch ", function(state)
-    getgenv().AutoPunch = state
+
     
-    if AutoPunch == true then
-        game:GetService("RunService").Stepped:connect(
-            pcall(
-                function()
-    
-                        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "leftHand")
-                        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "rightHand")
-                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(
-                            game:GetService("Players").LocalPlayer.Backpack.Punch
-                        )
-                    
-                end
-            )
-        end
-        
-
-    end
-
-
-    )
-)
 
 
 
