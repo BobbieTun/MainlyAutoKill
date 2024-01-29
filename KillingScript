@@ -14,7 +14,7 @@ getgenv().HitboxTransparency = 0.9
 
 getgenv().HitboxStatus = false
 
-
+getgenv().AutoPunch = false
 getgenv().Walkspeed = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
 getgenv().Jumppower = game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower
 
@@ -55,7 +55,7 @@ local PlayerTab = Window:Tab("Players","rbxassetid://12296135476")
 local VisualTab = Window:Tab("Visuals","rbxassetid://12308581351")
 
 HomeTab:InfoLabel("Premium")
-
+HomeTab:InfoLabel("By Bobbie")
 HomeTab:Section("Set up")
 
 HomeTab:TextBox("Hitbox Size", function(value)
@@ -65,7 +65,7 @@ end)
 HomeTab:TextBox("Hitbox Transparency", function(number)
     getgenv().HitboxTransparency = number
 end)
-HomeTab:Toggle("No Cooldown tool ", function(state)
+HomeTab:TextBox("Cooldown using tool + punch time", function(number)
     if state then
         function cooldown()
             for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
@@ -73,7 +73,7 @@ HomeTab:Toggle("No Cooldown tool ", function(state)
                     v.ClassName == "Tool" and v.Name == "Handstands" or v.Name == "Situps" or v.Name == "Pushups" or
                         v.Name == "Weight"
                  then
-                    v:FindFirstChildOfClass("NumberValue").Value = 0
+                    v:FindFirstChildOfClass("NumberValue").Value = number
                     repeat
                         wait()
                     until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
@@ -82,11 +82,39 @@ HomeTab:Toggle("No Cooldown tool ", function(state)
             end
         end
         cooldown()
-        game:GetService("Players").LocalPlayer.Backpack.Punch:FindFirstChildOfClass("NumberValue").Value = 0
+        game:GetService("Players").LocalPlayer.Backpack.Punch:FindFirstChildOfClass("NumberValue").Value = number
     end
 
 end)
 HomeTab:Section("Main")
+
+
+HomeTab:Toggle("AutoPunch ", function(state)
+    getgenv().AutoPunch = state
+    
+    if AutoPunch == true then
+        game:GetService("RunService").Stepped:connect(
+            pcall(
+                function()
+    
+                        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "leftHand")
+                        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "rightHand")
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(
+                            game:GetService("Players").LocalPlayer.Backpack.Punch
+                        )
+                    
+                end
+            )
+        end
+        
+
+    end
+
+
+    )
+)
+
+
 
 HomeTab:Toggle("Status: ", function(state)
 	getgenv().HitboxStatus = state
