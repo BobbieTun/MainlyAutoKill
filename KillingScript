@@ -87,7 +87,32 @@ HomeTab:TextBox("Cooldown using tool + punch time", function(number)
 
 end)
 HomeTab:Section("Main")
+function  AutoPunch()
+    game:GetService("RunService").Stepped:connect(
+    function()
+        pcall(
+            function()
 
+                    game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "leftHand")
+                    game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch", "rightHand")
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(
+                        game:GetService("Players").LocalPlayer.Backpack.Punch
+                    )
+                
+            end
+        
+        )
+    end
+    
+)
+    
+end
+HomeTab:Button("Auto punch- Delay", function ()
+    wait()
+    AutoPunch()
+
+    
+end)
 
 
     
