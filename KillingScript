@@ -66,7 +66,7 @@ HomeTab:TextBox("Hitbox Transparency", function(number)
     getgenv().HitboxTransparency = number
 end)
 HomeTab:TextBox("Cooldown using tool + punch time", function(number)
-    if state then
+    
         function cooldown()
             for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                 if
@@ -83,7 +83,7 @@ HomeTab:TextBox("Cooldown using tool + punch time", function(number)
         end
         cooldown()
         game:GetService("Players").LocalPlayer.Backpack.Punch:FindFirstChildOfClass("NumberValue").Value = number
-    end
+    
 
 end)
 HomeTab:Section("Main")
