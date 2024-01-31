@@ -115,6 +115,28 @@ HomeTab:Button("Auto punch- Delay", function ()
 end)
 
 
+
+
+
+
+
+HomeTab:Button("tprandomplayers", function()
+    local randomPlayer = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())]
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+    CFrame.new(
+    Vector3.new(
+        randomPlayer.Character.Head.Position.X,
+        randomPlayer.Character.Head.Position.Y,
+        randomPlayer.Character.Head.Position.Z
+    )
+)
+
+
+
+end)
+
+
+
     
 
 
@@ -252,6 +274,12 @@ end)
 PlayerTab:Button("Rejoin", function()
     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
+
+
+
+
+    
+
 
 VisualTab:InfoLabel("Wait 3-10 seconds")
 
