@@ -1,4 +1,5 @@
-
+--// support Killing .
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BobbieTun/CmdKill/main/Obf"))()
 
 local CoreGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
@@ -65,6 +66,23 @@ end)
 HomeTab:TextBox("Hitbox Transparency", function(number)
     getgenv().HitboxTransparency = number
 end)
+HomeTab:TextBox("New Hitbox ", function(number)
+    local players = Players:GetPlayers()
+    if  Players.Character:FindFirstChild('HumanoidRootPart') then
+        local sizeArg = tonumber(number)
+        local Size = Vector3.new(sizeArg,sizeArg,sizeArg)
+        local Root = Players.Character:FindFirstChild('HumanoidRootPart')
+        if Root:IsA("BasePart") then
+            if not number or sizeArg == 1 then
+                Root.Size = Vector3.new(2,1,1)
+                Root.Transparency = 0.4
+            else
+                Root.Size = Size
+                Root.Transparency = 0.4
+            end
+        end
+    end	
+end)
 HomeTab:TextBox("Cooldown using tool + punch time", function(number)
     
         function cooldown()
@@ -116,10 +134,10 @@ end)
 
 
 
+HomeTab:Button("Godmode-Work for some game?", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/main/main",true))()
 
-
-
-
+end)
 HomeTab:Button("tprandomplayers", function()
     local randomPlayer = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())]
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
@@ -294,4 +312,6 @@ getgenv().outlinetrans = 0.5 --Change outline transparency
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/Highlight-ESP.lua"))()
 end)
+
+
 
